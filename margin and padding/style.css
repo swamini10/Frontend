@@ -1,8 +1,7 @@
-
 #d1 {
     border: 2px solid;
     padding: 20px;
-    background-color:rgb(255, 254, 196);
+    background-color: rgb(255, 254, 196);
 }
 
 #d2 {
@@ -12,17 +11,19 @@
 #d3 {
     display: block;
     padding-left: 20px;
-     width:1100px;
+    width: 1100px;
 }
-#left{ 
-    background-color:rgb(94, 209, 248);
+
+#left {
+    background-color: rgb(94, 209, 248);
     border-radius: 5%;
     border: 2px solid;
     width: 400px;
     height: 480px;
 
 }
-#circle{
+
+#circle {
     margin-top: 5px;
     margin-left: 120px;
     width: 140px;
@@ -32,21 +33,24 @@
     background-color: white;
 }
 
-#h1{
-    
-    background-color:rgb(94, 209, 248);
+#h1 {
+
+    background-color: rgb(94, 209, 248);
     border: 2px solid;
     height: 90px;
 }
-#h3{
-    background-color:rgb(94, 209, 248);
+
+#h3 {
+    background-color: rgb(94, 209, 248);
     margin-top: 5px;
     border: 2px solid;
     height: 260px;
     font-size: 50px;
 }
-#h4{
-    background-color:rgb(94, 209, 248);
+
+#h4 {
+    background-color: rgb(94, 209, 248);
     border: 2px solid;
-    height: 180px;;
+    height: 180px;
+    ;
 }
