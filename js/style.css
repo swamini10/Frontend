@@ -1,0 +1,14 @@
+
+#main{
+    padding: 20px;
+    margin: 80px;
+    /* display: flex;
+    justify-content: space-between; */
+}
+#input{
+    margin: 80px;
+    padding: 5px;
+}
+body{
+    color: red;
+}
