@@ -28,19 +28,25 @@ public class StudentService {
 		return Arrays.asList(s1, s2, s3, s4, s5, s6, s7,s8, s9, s10, s11, s12, s13);
 	}
 	
-	
-     public Student getStudent(String email) {
-    	 //allStudents();
-    	 
-    	 //main logic 
-    	 
-    	 for(Student stu : allStudents()) {
-    		 if(stu.getEmail().equals(email)) {
-    			 return stu;
-    		 }
-    	 }
-    	 return new Student();
-     }
 
+    public Student getStudent(String email) {
+   	 //allStudents();    	 
+   	 //main logic 
+   	 for(Student stu : allStudents()) {
+   		 if(stu.getEmail().equals(email)) {
+   			 return stu;
+   		 }
+   	 }
+   	 return new Student();
+    }
+
+	public Student getStudents(String dept) {
+		for(Student stu : allStudents()) {
+   		 if(stu.getDept().equals(dept)) {
+   			 return stu;
+   		 }
+   	 }
+   	 return new Student();
+	}
 	
 }

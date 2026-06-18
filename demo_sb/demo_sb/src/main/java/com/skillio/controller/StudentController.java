@@ -27,7 +27,10 @@ public class StudentController {
 	// create and dummy data of student in service file 
 	
 	
-	
+	@GetMapping("/Students/{dept}")
+	public Student getStudentByDept(@PathVariable("dept") String dept) {
+		return ss.getStudents(dept);
+	}
 	
 	
 }
