@@ -1,11 +1,14 @@
 package com.skillio.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skillio.model.AccountDetailsDTO;
 import com.skillio.model.User;
 import com.skillio.repository.UserRepository;
 
@@ -36,6 +39,106 @@ public class UserService {
 		user.setBalance(0);
 		
 		return ur.save(user);
+	}
+
+	public AccountDetailsDTO deposite(int accno, int aadhaar, int amount) {	
+		Optional<User> user = ur.findByAccNo(accno);
+
+		if(user.isPresent()) {
+			
+			User myData = user.get();
+			String myName = myData.getFirstname() + " " + myData.getLastname();
+			if(myData.getAadhar() == aadhaar) {
+				
+				int myBalance = myData.getBalance() + amount;
+				myData.setBalance(myBalance);
+
+				//myData.setBalance(myData.getBalance() + amount);
+								
+				ur.save(myData);
+				
+				AccountDetailsDTO add = new AccountDetailsDTO();
+				
+				add.setAccNo(accno);
+				add.setName(myName);
+				add.setBalance(myBalance);
+
+				return add;
+				
+			} else {
+				throw new RuntimeException("Account Number Or Aadhaar Number is not valid");
+			}
+		}else {
+			throw new RuntimeException("User not found");
+		}
+		
+	}
+
+	public List<AccountDetailsDTO> allUsers() {
+		
+		List<AccountDetailsDTO> adds = new ArrayList<AccountDetailsDTO>();
+		
+		List<User> allUsers = ur.findAll();
+		
+		for(User user: allUsers) {
+			AccountDetailsDTO add = new AccountDetailsDTO();
+			add.setName(user.getFirstname() + " " + user.getLastname());
+			add.setAccNo(user.getAccNo());
+			add.setBalance(user.getBalance());
+			adds.add(add);
+		}
+		
+		return adds;	
+	}
+
+	public AccountDetailsDTO findUser(int accno) {
+		
+		AccountDetailsDTO add = new AccountDetailsDTO();
+		
+		Optional<User> u = ur.findByAccNo(accno);
+
+		if(u.isPresent()) {
+			add.setName(u.get().getFirstname() + " " + u.get().getLastname());
+			add.setAccNo(u.get().getAccNo());
+			add.setBalance(u.get().getBalance());
+			return add;
+		} else {
+			throw new RuntimeException("User not found");
+		}
+	}
+
+	public AccountDetailsDTO withdraw(int accno, int aadhaar, int amount) {
+		// TODO Auto-generated method stub
+		
+		Optional<User> user = ur.findByAccNo(accno);
+
+		if(user.isPresent()) {
+			
+			User myData = user.get();
+			String myName = myData.getFirstname() + " " + myData.getLastname();
+			if(myData.getAadhar() == aadhaar) {
+				
+				int myBalance = myData.getBalance() - amount;
+				myData.setBalance(myBalance);
+
+				//myData.setBalance(myData.getBalance() - amount);
+								
+				ur.save(myData);
+				System.out.println(myData);
+				AccountDetailsDTO add = new AccountDetailsDTO();
+				
+				add.setAccNo(accno);
+				add.setName(myName);
+				add.setBalance(myBalance);
+
+				return add;
+				
+			} else {
+				throw new RuntimeException("Account Number Or Aadhaar Number is not valid");
+			}
+		}else {
+			throw new RuntimeException("User not found");
+		}
 	}
 
 }
