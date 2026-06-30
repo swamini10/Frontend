@@ -145,12 +145,13 @@ public class UserService {
 		// TODO Auto-generated method stub
 		
 		Optional<User> user = ur.findByAccNo(accnofrom);
-		Optional<User> user2 = ur.findByAccNo(accnofrom);
+		Optional<User> user2 = ur.findByAccNo(accno);
 		if(user.isPresent() && user2.isPresent()) {
 			
 			User myData = user.get();
 			User myData1 = user2.get();
 			String myName = myData.getFirstname() + " " + myData.getLastname();
+			String myName1 = myData1.getFirstname() + " " + myData.getLastname();
 			if(myData.getAadhar() == aadhaarfrom && myData1.getAadhar() == aadhaar) {
 				
 				int myBalance = myData.getBalance() - amount;
@@ -164,11 +165,14 @@ public class UserService {
 				add.setAccNo(accnofrom);
 				add.setName(myName);
 				add.setBalance(myBalance);
+					
+				int updatedBalance = myData1.getBalance() + amount;
+				myData1.setBalance(updatedBalance);
 				
 				ur.save(myData1);
 				add.setAccNo(accno);
-				add.setName(myName);
-				add.setBalance(myBalance);
+				add.setName(myName1);
+				add.setBalance(updatedBalance);
 				
 				return add;
 				
