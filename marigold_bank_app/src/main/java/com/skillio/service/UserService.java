@@ -187,6 +187,33 @@ public class UserService {
 		}
 	}
 
+	public String deleteuser(int accno, int aadhaar) {
+		// TODO Auto-generated method stub
+		Optional<User> user = ur.findByAccNo(accno);
+
+		if(user.isPresent()) {
+			
+			User myData = user.get();
+			String myName = myData.getFirstname() + " " + myData.getLastname();
+			if(myData.getAadhar() == aadhaar) {
+				
+				if(myData.getBalance() > 0) {
+					throw new RuntimeException("Bhai tere paise nila le warna hum kha jayege");
+				}
+				
+				ur.deleteById(myData.getId());
+				
+				return "Acount has been deleted succesfully";
+				
+				
+			} else {
+				throw new RuntimeException("Account Number Or Aadhaar Number is not valid");
+			}
+		}else {
+			throw new RuntimeException("User not found");
+		}
+	}
+
 	
 
 }
